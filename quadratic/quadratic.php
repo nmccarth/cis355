@@ -13,7 +13,7 @@
 			$resTwo = (-$bVar + sqrt(pow($bVar,2) - (4 * $aVar * $cVar))) / (2 * $aVar);
 			if(is_nan($resOne) && !is_nan($resTwo))
 				echo "Result is $resTwo";
-			else if(is_nan($resTwo) || !is_nan($resOne))
+			else if(is_nan($resTwo) && !is_nan($resOne))
 				echo "Result is $resOne";
 			else if(!is_nan($resOne) && !is_nan($resTwo))
 				echo "Result is $resOne and $resTwo";
