@@ -20,9 +20,8 @@
 			else
 				echo "Can't find result";
 
-
-			//echo "Result for ${aVar}x^2 + ${bVar}x + $cVar = 0: $resOne, $resTwo";
 		?>
+			<button onclick="window.history.back();">Try Another</button>
 	</body>
 </html>
 
