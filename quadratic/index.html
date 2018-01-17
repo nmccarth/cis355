@@ -3,8 +3,19 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Quadratic Formula Solver</title>
-
-
+		<style>
+			label{
+				display: inline-block;
+				float: left;
+				clear: left;
+				width: 50px;
+				text-align: left;
+			}
+			input{
+				display: inline-block;
+				float: left;
+			}
+		</style>
 	</head>
 	<body>
 		<form action="quadratic.php" method="post">
@@ -17,6 +28,7 @@
 
 			<label for="cVar">C:</label>
 			<input id="cVar" type="number" name="cVar" min="1" /><br />
+			<br />
 
 			<input type="submit">
 		</form>
