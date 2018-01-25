@@ -6,33 +6,37 @@
 		<style>
 			body { 
 				font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
-				line-height: 0.5;	
+				line-height: 2;	
 			}
 		</style>
 	</head>
 	<body>
 <?php
 echo("Lower left to upper right<br /><br />");
-$col = 0;
-$row = 19;
+$col = 1;
+$row = 20;
 $grid = array("","","","","","","","","","","","","","","","","","","","");
-$output = "";
+$output = "*";
+//echo("<script>console.log('");
+//echo("$col , $row ");
+//echo("')</script>");
 
-while ($col != 19 || $row != 0) {
+
+while ($col != 20 || $row != 0) {
 	$case = rand(0,1);
-	if ($col == 19) {
+	if ($col == 20) {
 		$case = 0;
-	} elseif ($row == 0) {
+	} 
+	if ($row == 0) {
 		$case = 1;
 	}
 	if ($case == 1) {
 			$col++;
 			$output .= "*";
-	} else {
+	} 
+	if ($case == 0) {
 		$grid[$row] = $output;
-		if(! $row = 0) {
-			$row--;
-		}
+		$row--;
 		$output = "";
 		for($i = 0; $i < $col; $i++) {
 			if ($i == $col - 1) {
@@ -42,16 +46,23 @@ while ($col != 19 || $row != 0) {
 			}
 		}	
 	}
+	//echo("<script>console.log('");
+	//echo("$col , $row , $case");
+	//echo("')</script>");
 }
+$counter = 0;
 foreach ($grid as $line){
+	$counter++;
+	
+	if($counter == 1) {
+		continue;
+	}
 	$length = strlen($line);
-	while ($length < 19) {
+	while ($length < 20) {
 		$line .= "-";
 		$length++;
 	}
-	if ($line != "-------------------") {
-		echo("$line <br />");
-	}
+	echo("$line <br />");
 }
 
 /*---------------------------------------------*
