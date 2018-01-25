@@ -148,9 +148,20 @@ foreach($grid12 as $type1) {
 }
 
 
+/*---------------------------------------------*/
+echo("<br /><hr />Creating an array based on name<br /><br />");
+$name = "neal";
+$nameArray = array();
 
+for($i = 0; $i < 4; $i++) {
+	$nameArray[substr($name,0,$i)]  = substr($name,$i);
+	$nameArray[substr($name,0,$i)] .= substr($name,strlen($name)-$i);
+}
 
-
+foreach($nameArray as $step) {
+	print_r($step);
+	echo("<br />");
+}
 
 ?>	
 
