@@ -9,8 +9,8 @@
 			$aVar = $_POST["aVar"];
 			$bVar = $_POST["bVar"];
 			$cVar = $_POST["cVar"];
-			$resOne = (-$bVar - sqrt(pow($bVar,2) - (4 * $aVar * $cVar))) / (2 * $aVar);
-			$resTwo = (-$bVar + sqrt(pow($bVar,2) - (4 * $aVar * $cVar))) / (2 * $aVar);
+			$resOne = (-$bVar - sqrt(($bVar * $bVar) - (4 * $aVar * $cVar))) / (2 * $aVar);
+			$resTwo = (-$bVar + sqrt(($bVar * $bVar) - (4 * $aVar * $cVar))) / (2 * $aVar);
 			if(is_nan($resOne) && !is_nan($resTwo))
 				echo "Result is $resTwo";
 			else if(is_nan($resTwo) && !is_nan($resOne))
