@@ -139,7 +139,7 @@ while ($col2 != 0 || $row2 != 0) {
 	}
 	if ($case == 1) {
 		echo(" -- decremented column -- ");
-		$col12--;
+		$col2--;
 		$grid12[$col2][$row2] += 2;
 	} 
 	if ($case == 0) {
@@ -155,9 +155,16 @@ while ($col2 != 0 || $row2 != 0) {
 
 
 
-
+$counter = 0;
 foreach($grid12 as $type1) {
 	foreach($type1 as $type2) {
+		$counter++;
+		if ($counter > 400) {
+			continue;
+		}
+		echo("<script>console.log('");
+		echo("$counter printing $type2");
+		echo("')</script>");
 		echo($type2);
 	}
 	echo("<br />");
