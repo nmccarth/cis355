@@ -31,8 +31,14 @@ while ($col != 20 || $row != 0) {
 		$case = 1;
 	}
 	if ($case == 1) {
-			$col++;
-			$output .= "*";
+		$col++;
+		$output .= "*";
+		if ($row == 0) {
+			$grid[$row + 1] .= "*";
+			//echo("<script>console.log('");
+			//echo("$grid[$row]");
+			//echo("')</script>");
+		}
 	} 
 	if ($case == 0) {
 		$grid[$row] = $output;
@@ -49,11 +55,13 @@ while ($col != 20 || $row != 0) {
 	//echo("<script>console.log('");
 	//echo("$col , $row , $case");
 	//echo("')</script>");
+
 }
+
 $counter = 0;
 foreach ($grid as $line){
 	$counter++;
-	
+
 	if($counter == 1) {
 		continue;
 	}
@@ -65,13 +73,14 @@ foreach ($grid as $line){
 	echo("$line <br />");
 }
 
-/*---------------------------------------------*
+echo("<script>console.log('finished part 1')</script>");
+
+/*---------------------------------------------*/
 echo("<br /><hr />Lower left to upper right and lower right to upper left<br /><br />");
 $col1 = 0;
 $row1 = 19;
-$col1 = 19;
+$col2 = 20;
 $row2 = 19;
-//$grid = array("","","","","","","","","","","","","","","","","","","","");
 $grid12 = array(
 	array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
 	array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
@@ -94,25 +103,70 @@ $grid12 = array(
 	array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
 	array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 );
+echo("<script>console.log('array loaded')</script>");
 
-$grid12[$col1][$row1] += 1;
-while($col1 != 19 || $row1 != 0) {
+$grid12[$col1][$row1]++;
+
+while ($col1 != 20 || $row1 != 0) {
 	$case = rand(0,1);
-	if ($case == 1 && $col1 != 19) {
-		$col1++;
-		$grid12[$col1][$row1] += 1;
-	} else {
-		$row1++;
-		$grid12[$col1][$row1] += 1;
+	if ($col1 == 20) {
+		$case = 0;
+	} 
+	if ($row1 == 0) {
+		$case = 1;
 	}
+	if ($case == 1) {
+		$col1++;
+		$grid12[$col1][$row1]++;
+	} 
+	if ($case == 0) {
+		$row1--;
+		$grid12[$col1][$row1]++;
+	}	
 }
-echo("test");
-foreach ($grid12 as $type1) {
-	foreach ($type1 as $type2) {
+
+$grid12[$col2][$row2] += 2;
+
+while ($col2 != 0 || $row2 != 0) {
+	$case = rand(0,1);
+	echo("<script>console.log('");
+	echo("$col2, $row2 ");
+	if ($col2 == 0) {
+		$case = 0;
+	} 
+	if ($row2 == 0) {
+		$case = 1;
+	}
+	if ($case == 1) {
+		echo(" -- decremented column -- ");
+		$col12--;
+		$grid12[$col2][$row2] += 2;
+	} 
+	if ($case == 0) {
+		echo(" -- decremented row -- ");
+		$row2--;
+		$grid12[$col2][$row2] += 2;
+	}	
+	echo("$col2, $row2 ");
+	echo("')</script>");
+}
+
+
+
+
+
+
+foreach($grid12 as $type1) {
+	foreach($type1 as $type2) {
 		echo($type2);
 	}
 	echo("<br />");
-}*/
+}
+
+
+
+
+
 
 ?>	
 
