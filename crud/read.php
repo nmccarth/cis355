@@ -33,34 +33,33 @@ if ( null==$id ) {
 	<div class="row">
 	     <h3>Read a Customer</h3>
 	</div>
-	<div class="">
+	<div class="form-group">
 	    <div class="control-group">
-		<label class="form-control-label">Name</label>
-		<div class="controls">
+		<label class="">Name</label>
+		<div class="form-control">
 		    <label class="form-check">
 			<?php echo $data[ 'name'];?>
 		    </label>
 		</div>
 	    </div>
 	    <div class="control-group">
-		<label class="form-control-label">Email Address</label>
-		<div class="controls">
+		<label class="">Email Address</label>
+		<div class="form-control">
 		    <label class="form-check">
 			<?php echo $data[ 'email'];?>
 		    </label>
 		</div>
 	    </div>
 	    <div class="control-group">
-		<label class="form-control-label">Mobile Number</label>
-		<div class="controls">
+		<label class="">Mobile Number</label>
+		<div class="form-control">
 		    <label class="form-check">
 			<?php echo $data[ 'mobile'];?>
 		    </label>
 		</div>
 	    </div>
-	    <div class="form-actions"> <a class="btn" href="index.php">Back</a>
-	    </div>
 	</div>      
+	<a class="btn btn-primary" href="index.php">Back</a>
 
 
 </body>
