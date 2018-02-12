@@ -27,6 +27,18 @@
 			</thead>
 			<tbody>
 				<?php
+					function format_phone($phone)
+					{
+    						$phone = preg_replace("/[^0-9]/", "", $phone);
+ 
+						if(strlen($phone) == 7) {
+							return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+						} elseif(strlen($phone) == 10) {
+							return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
+						} else {
+							return $phone;
+						}
+					}
 					include 'database.php';
 					$pdo = Database::connect();
 					$sql = 'SELECT * FROM customers ORDER BY id DESC';
@@ -34,7 +46,7 @@
 						echo '<tr>';
 						echo '<td>'. $row['name'] . '</td>';
 						echo '<td>'. $row['email'] . '</td>';
-						echo '<td>'. $row['mobile'] . '</td>';
+						echo '<td>'. format_phone($row['mobile']) . '</td>';
 						echo '<td width=250>';
 						echo '<a class="btn btn-info" href="read.php?id='.$row['id'].'">Read</a>';
 						echo ' ';
