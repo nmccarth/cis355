@@ -39,7 +39,7 @@
 							return $phone;
 						}
 					}
-					include 'database.php';
+					include '../../database/database.php';
 					$pdo = Database::connect();
 					$sql = 'SELECT * FROM customers ORDER BY id DESC';
 					foreach ($pdo->query($sql) as $row) {
