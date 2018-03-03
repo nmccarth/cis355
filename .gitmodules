@@ -1,3 +1,4 @@
 [submodule "qm"]
 	path = qm
 	url = https://github.com/cis355/qm
+	ignore = all
