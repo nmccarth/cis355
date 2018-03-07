@@ -1,4 +1,11 @@
 <?php 
+/* --------------------------------------------------------------------------------------
+ * filename    : fr_ques_list2.php
+ * author      : nmccarth, <echo "bm1jY2FydGggW2F0XSBzdnN1IFtkb3RdIGVkdQo=" | base64 -d>
+ * description : This program allows a user to view all comments, a particular comment,
+ *			edit comments, delete comments, and add comments.
+ * --------------------------------------------------------------------------------------
+ */
 
 include '/home/gpcorser/public_html/database/header.php';
 include '/home/gpcorser/public_html/database/database.php';
