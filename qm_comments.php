@@ -1,6 +1,6 @@
 <?php 
 /* --------------------------------------------------------------------------------------
- * filename    : fr_ques_list2.php
+ * filename    : qm_comments.php
  * author      : nmccarth, <echo "bm1jY2FydGggW2F0XSBzdnN1IFtkb3RdIGVkdQo=" | base64 -d>
  * description : This program allows a user to view all comments, a particular comment,
  *			edit comments, delete comments, and add comments.
@@ -11,7 +11,15 @@ include '/home/gpcorser/public_html/database/header.php';
 include '/home/gpcorser/public_html/database/database.php';
 // include 'session.php';
 
-class QmComments { 
+interface ICommentsCrud{
+  function listTable();
+  function createRow();
+  function readRow();
+  function updateRow();
+  function deleteRow();
+}
+
+class QmComments implements ICommentsCrud {
 
 	function listTable(){
 		// begin body section
@@ -208,10 +216,11 @@ class QmComments {
 }
 
 switch ($_GET['oper']) {
-case 0: QmComments::listTable(); break;
-case 1: QmComments::createRow(); break;
-case 2: QmComments::readRow()  ; break;
-case 3: QmComments::updateRow(); break;
-case 4: QmComments::deleteRow(); break;
+	case 0:  QmComments::listTable(); break;
+	case 1:  QmComments::createRow(); break;
+	case 2:  QmComments::readRow()  ; break;
+	case 3:  QmComments::updateRow(); break;
+	case 4:  QmComments::deleteRow(); break;
+	default: echo 'error'; break;
 }
 ?> 
