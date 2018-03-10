@@ -35,7 +35,7 @@ class QmComments implements ICommentsCrud {
 		// begin table
 		echo '<table class="table table-striped table-bordered" style="background-color: lightgrey'. 
 			'!important"><thead>';
-		echo '<tr><th>com id</th><th>per id</th><th>ques id</th><th>comment</th><th>rating</th>'.
+		echo '<tr><th>com id</th><th>per id</th><th>ques id</th><th>Comment</th><th>Rating</th>'.
 			'<th>Actions</th></tr></thead><tbody>';
 
 
