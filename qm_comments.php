@@ -12,11 +12,11 @@ include '/home/gpcorser/public_html/database/database.php';
 // include 'session.php';
 
 interface ICommentsCrud{
-  function listTable();
-  function createRow();
-  function readRow();
-  function updateRow();
-  function deleteRow();
+	function listTable();
+	function createRow();
+	function readRow();
+	function updateRow();
+	function deleteRow();
 }
 
 class QmComments implements ICommentsCrud {
@@ -141,10 +141,8 @@ class QmComments implements ICommentsCrud {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE qm_comments SET per_id = ? , ques_id = ?, comment = ?, rating = ? WHERE id= ?";
-// 			$sql = "INSERT INTO qm_comments (per_id, ques_id, comment, rating) values(?, ?, ?, ?) ON DUPLICATE KEY UPDATE id=".$id; 
 			$q = $pdo->prepare($sql);
 			$q->execute(array($per, $ques, $comment, $rating, $id));
-// 			$q->execute(array($per, $ques, $comment, $rating));
 			Database::disconnect();
 			header("Location: qm_comments.php?oper=0&ques=". $ques . '&per=' . $per);
 		} else {
@@ -156,28 +154,26 @@ class QmComments implements ICommentsCrud {
 			$q->execute(array($id));
 			$data = $q->fetch(PDO::FETCH_ASSOC);
 			Database::disconnect();
-
 		}
 		// begin body section
 		echo '<body><div class="container">';
 
 		// title of page
 		echo '<div class="row"><h3>Update Comment</h3></div>';
-		echo '<form class="form-horizontal" action="qm_comments.php?oper=1" method="post">';
+		echo '<form class="form-horizontal" action="qm_comments.php?oper=3" method="post">';
 
 		echo '<input type="hidden" name="per" value="' . $_GET['per'] . '">';
 		echo '<input type="hidden" name="com" value="' . $_GET['com'] . '">';
 		echo '<input type="hidden" name="ques" value="' . $_GET['ques'] . '">';
+
 		echo '<div class="form-group"><label for="comment">Comment: </label><input class="form-control" name="comment" id="comment"'.
 			'value="' .$data['comment'] . '"></div>';
-
 		echo '<div class="form-group"><label for="rating">Rating: </label><input type="numeric" class="form-control" name="rating" id="rating"'.
 			'value="' . $data['rating'] . '"></div>';
 
-		echo '<button type="submit" class="btn btn-success">Yes</button><span>   </span>';
+		echo '<button type="submit" class="btn btn-success">Update</button><span>   </span>';
 		echo '<a class="btn btn-danger" href="qm_comments.php?oper=0&per='. $_GET['per'] . '&ques=' . $_GET['ques'] . '">No</a>';
 		echo '</form></div>';
-
 	}
 
 	function deleteRow() {
