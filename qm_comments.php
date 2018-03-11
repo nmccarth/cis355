@@ -172,7 +172,7 @@ class QmComments implements ICommentsCrud {
 			'value="' . $data['rating'] . '"></div>';
 
 		echo '<button type="submit" class="btn btn-success">Update</button><span>   </span>';
-		echo '<a class="btn btn-danger" href="qm_comments.php?oper=0&per='. $_GET['per'] . '&ques=' . $_GET['ques'] . '">No</a>';
+		echo '<a class="btn btn-danger" href="qm_comments.php?oper=0&per='. $_GET['per'] . '&ques=' . $_GET['ques'] . '">Go back</a>';
 		echo '</form></div>';
 	}
 
