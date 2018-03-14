@@ -1,4 +1,11 @@
-<?php 
+<?php
+	if($_SESSION["cust_id"]!=1){ // if "user" not set,
+		session_destroy();
+		header('Location: login.php');     // go to login page
+		exit;
+	}
+	$sessionid = $_SESSION['cust_id'];
+
 	require '/home/gpcorser/public_html/database/database.php';
 	$id = null;
 	if ( !empty($_GET['id'])) {

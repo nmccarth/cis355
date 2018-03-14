@@ -5,7 +5,7 @@ if(!isset($_SESSION["cust_id"])){ // if "user" not set,
 	header('Location: login.php');     // go to login page
 	exit;
 }
-$sessionid = $_SESSION['fr_person_id'];
+$sessionid = $_SESSION['cust_id'];
 
 
     require '/home/gpcorser/public_html/database/database.php';

@@ -1,11 +1,11 @@
 <?php
 session_start();
-if($_SESSION["cust_id"]!=1){ // if "user" not set,
+if(!isset($_SESSION["cust_id"])){ // if "user" not set,
 	session_destroy();
 	header('Location: login.php');     // go to login page
 	exit;
 }
-$sessionid = $_SESSION['fr_person_id'];
+$sessionid = $_SESSION['cust_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
