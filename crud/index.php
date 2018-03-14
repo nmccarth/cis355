@@ -1,3 +1,12 @@
+<?php
+session_start();
+if($_SESSION["cust_id"]!=1){ // if "user" not set,
+	session_destroy();
+	header('Location: login.php');     // go to login page
+	exit;
+}
+$sessionid = $_SESSION['fr_person_id'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +24,9 @@
 	    <div class="row">
 		<p>
 		    <a href="create.php" class="btn btn-success">Create</a>
+		    <a href="logout.php" class="btn btn-info">Logout</a>
 		</p>
+
 		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
@@ -39,7 +50,7 @@
 							return $phone;
 						}
 					}
-					include '../../database/database.php';
+					require '/home/gpcorser/public_html/database/database.php';
 					$pdo = Database::connect();
 					$sql = 'SELECT * FROM customers ORDER BY id DESC';
 					foreach ($pdo->query($sql) as $row) {

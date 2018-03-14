@@ -7,7 +7,7 @@
 	</head>
 	<body>
 <?php
-include '../../database/database.php';
+require '/home/gpcorser/public_html/database/database.php';
 
 echo "<form action='lookup.php' method='get'>";
 

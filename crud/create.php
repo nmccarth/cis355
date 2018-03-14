@@ -1,6 +1,14 @@
 <?php
+session_start();
+if(!isset($_SESSION["cust_id"])){ // if "user" not set,
+	session_destroy();
+	header('Location: login.php');     // go to login page
+	exit;
+}
+$sessionid = $_SESSION['fr_person_id'];
 
-    require '../../database/database.php';
+
+    require '/home/gpcorser/public_html/database/database.php';
 
     if ( !empty($_POST)) {
         // keep track validation errors
