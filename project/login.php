@@ -16,7 +16,7 @@ include '../../public_html/database/header.php';
 if ( !empty($_POST)) { // if $_POST filled then process the form
 	// initialize $_POST variables
 	$username = $_POST['username']; // username is email address, db field is email
-	$password = $_POST['password']; // db field is password_hash
+	$password = $_POST['password']; // db field is password
 
 	// verify the username/password
 	$pdo = Database::connect();
@@ -27,19 +27,18 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	$data = $q->fetch(PDO::FETCH_ASSOC);
 
 	if($data) { // if successful login set session variables
-		if (password_verify($password,$data['password']) {
+		if (password_verify($password,$data['password'])) {
 			$_SESSION['id'] = $data['id']; 
 			header("Location: pj_person.php?oper=0");
 		}
+	} else { // otherwise go to login error page
+		session_destroy();
+		Database::disconnect();
+		header("Location: login_error.html");
 	}
 	Database::disconnect();
 }
-else { // otherwise go to login error page
-	session_destroy();
-	Database::disconnect();
-	header("Location: login_error.html");
-}
-} 
+
 // if $_POST NOT filled then display login form, below.
 ?>
 
