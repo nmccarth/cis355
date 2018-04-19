@@ -8,46 +8,46 @@
 include '../../database/header.php';
 include '../../database/database.php';
 include 'session.php';
-
+echo '
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Neal McCarthy</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link btn btn-warning" href="logout.php">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+';
 interface ICommentsCrud{
 	function listTable();
-	function createRow();
 	function readRow();
 	function updateRow();
 	function deleteRow();
 }
 
 class QmComments implements ICommentsCrud {
-
 	function listTable(){
-		// begin body section
 		echo '<body><div class="container">';
-
-		// title of page
-		echo '<div class="row"><h3>People</h3></div>';
-
-
+		echo '<div class="row"><h3 style="margin: 1em auto;">People</h3></div>';
 		// begin table
-		echo '<table class="table table-striped table-bordered" style="background-color: lightgrey'. 
-			'!important"><thead>';
-		echo '<tr><th>ID</th><th>Email</th><th>Name </th><th>Actions</th></tr></thead><tbody>';
-
-
-		// populate List table
+		echo '<table class="table table-striped table-bordered" style="width: auto !important;margin: 0 auto;"><thead>';
+		echo '<tr><th>ID</th><th>Email</th><th>Name</th><th>Actions</th></tr></thead><tbody>';
 		$pdo = Database::connect();
-		$sql = 'SELECT * FROM pj_persons'  
-
-
+		$sql = 'SELECT * FROM pj_persons';
 			foreach ($pdo->query($sql) as $row) {
 				echo '<tr>';
-				echo '<td>' .trim($row['id'])	   . '</td>';
+				echo '<td>' .trim($row['id']) . '</td>';
 				echo '<td>' .trim($row['email']) . '</td>';
-				echo '<td>' .trim($row['firstName']) . ' '
-					.trim($row['lastName']) '</td>';
+				echo '<td>' .trim($row['firstName']) . ' ' . trim($row['lastName']) . '</td>';
 
 				// actions
 				echo '<td>';
-				echo '<a class="btn btn-secondary" href="pj_person.php?oper=2&per='.  
+				echo '<a class="btn btn-primary" href="pj_person.php?oper=2&per='.  
 					$row['id'] . '">Read</a>';
 
 				echo ' ';
@@ -55,15 +55,18 @@ class QmComments implements ICommentsCrud {
 					$row['id'] . '">Update</a>';
 
 				echo ' ';
-				echo '<a class="btn btn-danger" href="qm_comments.php?oper=4&per='. 
-					$row['id'] . '">Delete</a>';
+				echo '<a class="btn btn-info" href="pj_assignments?oper=0&per='.
+					$row['id'] . '">Assignments</a>';
 
+				echo ' ';
+				echo '<a class="btn btn-danger" href="pj_person.php?oper=4&per='. 
+					$row['id'] . '">Delete</a>';
+				echo '</td>';
 				echo '</tr>';
 			}
 		Database::disconnect();
 		echo '</tbody></table></div></div></body>';
 	}
-
 	function readRow() {
 		$id = $_GET['per'];
 		$pdo = Database::connect();
@@ -104,14 +107,12 @@ class QmComments implements ICommentsCrud {
 			$q = $pdo->prepare($sql);
 			$q->execute(array($firtName,$lastName,$email, $id));
 			Database::disconnect();
-			header("Location: qm_comments.php?oper=0");
+			header("Location: pj_person.php?oper=0");
 		} else {
-			if $_GET['per'] != $_SESSION['id'] {
-				echo '<div class="alert alert-danger">'
-					echo'<strong>You can not update an account other than your own!</strong>'.
-					'</div>';
-				echo '<a class="btn btn-primary" href="qm_comments.php?oper=0">Go back</a>'.
-					'</div>';
+			if ($_GET['per'] != $_SESSION['id']) {
+				echo '<div class="alert alert-danger">';
+				echo'<strong>You can not update an account other than your own!</strong></div>';
+				echo '<a class="btn btn-primary" href="pj_person.php?oper=0">Go back</a></div>';
 				exit;
 			}
 			$id = $_GET['per'];
@@ -142,7 +143,7 @@ class QmComments implements ICommentsCrud {
 			'value="' . $data['email'] . '"></div>';
 
 		echo '<button type="submit" class="btn btn-success">Update</button><span>   </span>';
-		echo '<a class="btn btn-danger" href="qm_comments.php?oper=0">Go back</a>';
+		echo '<a class="btn btn-danger" href="pj_person.php?oper=0">Go back</a>';
 		echo '</form></div>';
 	}
 
@@ -157,15 +158,13 @@ class QmComments implements ICommentsCrud {
 			$q = $pdo->prepare($sql);
 			$q->execute(array($id));
 			Database::disconnect();
-			header("Location: qm_comments.php?oper=0");
+			header("Location: pj_person.php?oper=0");
 
 		} 
-		if $_GET['per'] != $_SESSION['id'] {
-			echo '<div class="alert alert-danger">'
-				echo'<strong>You can not update an account other than your own!</strong>'.
-				'</div>';
-			echo '<a class="btn btn-primary" href="qm_comments.php?oper=0">Go back</a>'.
-				'</div>';
+		if ($_GET['per'] != $_SESSION['id']) {
+			echo '<div class="alert alert-danger">';
+			echo'<strong>You can not update an account other than your own!</strong></div>';
+			echo '<a class="btn btn-primary" href="pj_person.php?oper=0">Go back</a></div>';
 			exit;
 		}
 
@@ -177,11 +176,10 @@ class QmComments implements ICommentsCrud {
 		echo '<p class="alert alert-error">Are you sure you want to delete ?</p>';
 		echo '<div class="form-actions">';
 		echo '<button type="submit" class="btn btn-danger">Yes</button><span>   </span>';
-		echo '<a class="btn btn-success" href="qm_comments.php?oper=0">No</a>';
+		echo '<a class="btn btn-success" href="pj_person.php?oper=0">No</a>';
 		echo '</div></form><br></div>';
 	}
 }
-
 switch ($_GET['oper']) {
 case 0:  QmComments::listTable(); break;
 case 2:  QmComments::readRow()  ; break;
