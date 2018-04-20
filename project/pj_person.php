@@ -17,26 +17,31 @@ echo '
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<ul class="navbar-nav">
 			<li class="nav-item active">
-				<a class="nav-link" href="#">People <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="pj_person.php?oper=0">People <span class="sr-only">(current)</span></a>
 			</li>
 		</ul>
 		<ul class="navbar-nav">
 			<li class="nav-item active">
-				<a class="nav-link" href="pj_projects.php">Projects</a>
+				<a class="nav-link" href="pj_projects.php?oper=0">Projects</a>
+			</li>
+		</ul>
+		<ul class="navbar-nav">
+			<li class="nav-item active">
+				<a class="nav-link" href="pj_assignment.php?oper=0">Assignments</a>
 			</li>
 		</ul>
 	</div>
 	<a class="nav-link btn btn-warning" href="logout.php">Logout</a>
 </nav>
 ';
-interface ICommentsCrud{
+interface IPersonCrud{
 	function listTable();
 	function readRow();
 	function updateRow();
 	function deleteRow();
 }
 
-class QmComments implements ICommentsCrud {
+class PjPerson implements IPersonCrud {
 	function listTable(){
 		echo '<body><div class="container">';
 		echo '<div class="row"><h3 style="margin: 1em auto;">People</h3></div>';
@@ -61,7 +66,7 @@ class QmComments implements ICommentsCrud {
 					$row['id'] . '">Update</a>';
 
 				echo ' ';
-				echo '<a class="btn btn-info" href="pj_assignments?oper=0&per='.
+				echo '<a class="btn btn-info" href="pj_assignment.php?oper=0&per='.
 					$row['id'] . '">Assignments</a>';
 
 				echo ' ';
@@ -187,10 +192,10 @@ class QmComments implements ICommentsCrud {
 	}
 }
 switch ($_GET['oper']) {
-case 0:  QmComments::listTable(); break;
-case 2:  QmComments::readRow()  ; break;
-case 3:  QmComments::updateRow(); break;
-case 4:  QmComments::deleteRow(); break;
+case 0:  PjPerson::listTable(); break;
+case 2:  PjPerson::readRow()  ; break;
+case 3:  PjPerson::updateRow(); break;
+case 4:  PjPerson::deleteRow(); break;
 default: echo 'error'; break;
 }
 ?> 

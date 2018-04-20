@@ -1,11 +1,10 @@
 <?php
+include '../../database/database.php';
+include '../../database/header.php';
 
 // Start or resume session, and create: $_SESSION[] array
 session_destroy(); // destroy any existing session
 session_start(); // and start a new one
-
-include '../../database/database.php';
-include '../../database/header.php';
 
 if ( !empty($_POST)) { // if $_POST filled then process the form
 	// initialize $_POST variables
@@ -23,7 +22,6 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 	if($data) { // if successful login set session variables
 		if (password_verify($password,$data['password'])) {
 			$_SESSION['id'] = $data['id']; 
-//  			header("Location: https://csis.svsu.edu/~nmccarth/cis355/project/pj_person.php?oper=0");
    			header("Location: pj_person.php?oper=0");
 		}
 	} else { // otherwise go to login error page

@@ -53,7 +53,7 @@ if (!empty($_POST)) {
 <body>
 	<div class="container">
 		<div class="row">
-			<h3>Create a Person</h3>
+			<h3>Create a new account</h3>
 		</div>
 		<form action="#" method="post">
 			<div class="form-group <?php echo !empty($fnameError)?'error':'';?>">

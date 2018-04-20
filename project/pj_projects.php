@@ -17,26 +17,32 @@ echo '
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<ul class="navbar-nav">
 			<li class="nav-item active">
-				<a class="nav-link" href="pj_person.php">People</a>
+				<a class="nav-link" href="pj_person.php?oper=0">People</a>
 			</li>
 		</ul>
 		<ul class="navbar-nav">
 			<li class="nav-item active">
-				<a class="nav-link" href="#">Projects<span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="pj_projects.php?oper=0">Projects<span class="sr-only">(current)</span></a>
+			</li>
+		</ul>
+		<ul class="navbar-nav">
+			<li class="nav-item active">
+				<a class="nav-link" href="pj_assignment.php?oper=0">Assignments</a>
 			</li>
 		</ul>
 	</div>
 	<a class="nav-link btn btn-warning" href="logout.php">Logout</a>
 </nav>
 ';
-interface ICommentsCrud{
+interface IProjectCrud{
 	function listTable();
+	function createRow();
 	function readRow();
 	function updateRow();
 	function deleteRow();
 }
 
-class QmComments implements ICommentsCrud {
+class PjProject implements IProjectCrud {
 	function listTable(){
 		echo '<body><div class="container">';
 		echo '<div class="row"><h3 style="margin: 1em auto;">Projects</h3></div>';
@@ -68,7 +74,7 @@ class QmComments implements ICommentsCrud {
 					$row['id'] . '&lead=' . $row['lead_fk'] . '">Update</a>';
 
 				echo ' ';
-				echo '<a class="btn btn-info" href="pj_assignments?oper=1&proj='.
+				echo '<a class="btn btn-info" href="pj_assignment.php?oper=1&proj='.
 					$row['id'] . '">Assign</a>';
 
 				echo ' ';
@@ -98,7 +104,7 @@ class QmComments implements ICommentsCrud {
 			header('Location: pj_projects.php?oper=0');
 		}
 		echo '<body> <div class="container"> <div class="span10 offset1">';
-		echo '<div class="row"> <h3>New Comment</h3> </div><form class="form-horizontal" action="pj_projects.php?oper=1" method="post">';
+		echo '<div class="row"> <h3>Add a new comment?</h3> </div><form class="form-horizontal" action="pj_projects.php?oper=1" method="post">';
 
 		echo '<input type="hidden" name="lead" value="' . $_SESSION['id'] . '">';
 		echo '<div class="form-group"><label for="name">Project Name: </label><input class="form-control" name="name" maxlength="255"></div>';
@@ -107,7 +113,7 @@ class QmComments implements ICommentsCrud {
 		
 		echo '<div class="form-group"><label for="date">Date: </label><input type="date" class="form-control" name="date"></div>';
 		echo '<button type="submit" class="btn btn-success">Yes</button><span>   </span>';
-		echo '<a class="btn btn-danger" href="qm_comments.php?oper=0&per='. $_GET['per'] . '&ques=' . $_GET['ques'] . '">No</a>';
+		echo '<a class="btn btn-danger" href="pj_projects.php?oper=0">No</a>';
 		echo '</form></div>';
 	}
 
@@ -247,11 +253,11 @@ class QmComments implements ICommentsCrud {
 	}
 }
 switch ($_GET['oper']) {
-case 0:  QmComments::listTable(); break;
-case 1:	 QmComments::createRow(); break;
-case 2:  QmComments::readRow()  ; break;
-case 3:  QmComments::updateRow(); break;
-case 4:  QmComments::deleteRow(); break;
+case 0:  PjProject::listTable(); break;
+case 1:	 PjProject::createRow(); break;
+case 2:  PjProject::readRow()  ; break;
+case 3:  PjProject::updateRow(); break;
+case 4:  PjProject::deleteRow(); break;
 default: echo 'error'; break;
 }
 ?> 
