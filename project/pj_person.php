@@ -116,7 +116,7 @@ class PjPerson implements IPersonCrud {
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE pj_persons SET firstName = ?, lastName = ?, email = ? WHERE id= ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($firtName,$lastName,$email, $id));
+			$q->execute(array($firstName,$lastName,$email, $id));
 			Database::disconnect();
 			header("Location: pj_person.php?oper=0");
 		} else {
