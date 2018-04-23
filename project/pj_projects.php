@@ -201,7 +201,7 @@ class PjProject implements IProjectCrud {
 			'<input class="form-control" name="desc" id="desc"'.
 			'value="' . $data['description'] . '" maxlength="500"></div>';
 
-		echo '<div class="form-group"><label for="email">Email: </label>'.
+		echo '<div class="form-group"><label for="email">Date: </label>'.
 			'<input type="date" class="form-control" name="date" id="date"'.
 			'value="' . $data['date'] . '"></div>';
 
