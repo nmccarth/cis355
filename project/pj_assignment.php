@@ -92,7 +92,7 @@ class PjAssignment implements IAssignmentCrud {
 
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO pj_assignments (person_fk, project_fk, comments) values(?, ?, ?, ?)"; 
+			$sql = "INSERT INTO pj_assignments (person_fk, project_fk, comments) values(?, ?, ?)"; 
 			$q = $pdo->prepare($sql);
 			$q->execute(array($person, $project, $comment));
 			Database::disconnect();
@@ -109,7 +109,7 @@ class PjAssignment implements IAssignmentCrud {
 		}
 		echo '<div class="row"> <h3>Add a new assignment?</h3> </div><form class="form-horizontal" action="pj_assignment.php?oper=1" method="post">';
 
-		echo '<input type="hidden" name="project" value="' . $_GET['proj'] . '">';
+		echo '<input type="hidden" name="proj" value="' . $_GET['proj'] . '">';
 		echo '<input type="hidden" name="per" value="' . $_SESSION['id'] . '">';
 
 		echo '<div class="form-group"><label for="comment">Comment: </label><input class="form-control" name="comment" maxlength="500"></div>';
